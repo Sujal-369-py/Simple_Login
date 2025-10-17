@@ -5,12 +5,14 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pathlib import Path
 from passlib.context import CryptContext
 import asyncio
+import os
 
 app = FastAPI()
 BASE_DIR = Path(__file__).parent
 
 # MongoDB
-client = AsyncIOMotorClient("mongodb+srv://UserXts_db_user:6UOSD2hon4O9dnz5@cluster0.znfwoni.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongo_uri = os.getenv("MONGO_URI")
+client = AsyncIOMotorClient(mongo_uri)
 db = client["test_subject_1"]["test_subject_users"]
 
 # Password hashing
