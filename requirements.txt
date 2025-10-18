@@ -1,4 +1,5 @@
 fastapi
-uvicorn[standard]
+uvicorn
 motor
 passlib[bcrypt]
+python-multipart
