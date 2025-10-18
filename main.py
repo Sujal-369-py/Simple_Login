@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Form, HTTPException
+from fastapi import FastAPI, Form
 from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -10,48 +10,66 @@ import os
 app = FastAPI()
 BASE_DIR = Path(__file__).parent
 
-# MongoDB
+# MongoDB Connection
 mongo_uri = os.getenv("MONGO_URI")
-client = AsyncIOMotorClient(mongo_uri)
-db = client["test_subject_1"]["test_subject_users"]
+
+if not mongo_uri:
+    raise RuntimeError("❌ MONGO_URI environment variable not set!")
+
+try:
+    client = AsyncIOMotorClient(mongo_uri, tls=True, serverSelectionTimeoutMS=5000)
+    db = client["test_subject_1"]["test_subject_users"]
+except Exception as e:
+    print("❌ MongoDB connection failed:", e)
+    raise
 
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Static files
-app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
-app.mount("/image", StaticFiles(directory=BASE_DIR / "image"), name="image")
+if (BASE_DIR / "static").exists():
+    app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
-# Index
+if (BASE_DIR / "image").exists():
+    app.mount("/image", StaticFiles(directory=BASE_DIR / "image"), name="image")
+
+# Index route
 @app.get("/")
 def home():
     return FileResponse(BASE_DIR / "index.html")
 
-# Register
+# Register route
 @app.post("/register")
 async def register_user(username: str = Form(...), email: str = Form(...), password: str = Form(...)):
-    if await db.find_one({"username": username}):
-        return JSONResponse(content={"message": "❌ Username already exists! Waiting..."}, status_code=400)
-    
-    hashed_password = pwd_context.hash(password)
-    await db.insert_one({"username": username, "email": email, "password": hashed_password})
-    
-    # Wait 2 seconds before returning success
-    await asyncio.sleep(2)
-    
-    return JSONResponse(content={"message": "✅ Registration successful! Waiting..."})
+    try:
+        # Check existing user
+        if await db.find_one({"username": username}):
+            return JSONResponse(content={"message": "❌ Username already exists! Waiting..."}, status_code=400)
 
-# Login
+        hashed_password = pwd_context.hash(password)
+        await db.insert_one({"username": username, "email": email, "password": hashed_password})
+
+        await asyncio.sleep(2)
+        return JSONResponse(content={"message": "✅ Registration successful! Waiting..."})
+    
+    except Exception as e:
+        print("❌ Error during registration:", e)
+        return JSONResponse(content={"message": "Internal server error. Please try again later."}, status_code=500)
+
+# Login route
 @app.post("/login")
 async def login(username: str = Form(...), password: str = Form(...)):
-    user = await db.find_one({"username": username})
-    if not user:
-        return JSONResponse(content={"message": "❌ User does not exist! Waiting..."}, status_code=400)
-    
-    if not pwd_context.verify(password, user["password"]):
-        return JSONResponse(content={"message": "❌ Wrong password! Waiting..."}, status_code=400)
-    
-    # Wait 2 seconds before returning success
-    await asyncio.sleep(2)
-    
-    return JSONResponse(content={"message": "✅ Login successful! Waiting..."})
+    try:
+        user = await db.find_one({"username": username})
+        if not user:
+            return JSONResponse(content={"message": "❌ User does not exist! Waiting..."}, status_code=400)
+
+        if not pwd_context.verify(password, user["password"]):
+            return JSONResponse(content={"message": "❌ Wrong password! Waiting..."}, status_code=400)
+
+        await asyncio.sleep(2)
+        return JSONResponse(content={"message": "✅ Login successful! Waiting..."})
+
+    except Exception as e:
+        print("❌ Error during login:", e)
+        return JSONResponse(content={"message": "Internal server error. Please try again later."}, status_code=500)
