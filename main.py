@@ -3,7 +3,6 @@ from fastapi.responses import JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from motor.motor_asyncio import AsyncIOMotorClient
 from pathlib import Path
-from passlib.context import CryptContext
 import asyncio
 import os
 
@@ -22,9 +21,6 @@ try:
 except Exception as e:
     print("❌ MongoDB connection failed:", e)
     raise
-
-# Password hashing
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Static files
 if (BASE_DIR / "static").exists():
@@ -46,8 +42,8 @@ async def register_user(username: str = Form(...), email: str = Form(...), passw
         if await db.find_one({"username": username}):
             return JSONResponse(content={"message": "❌ Username already exists!"}, status_code=400)
 
-        hashed_password = pwd_context.hash(password)
-        await db.insert_one({"username": username, "email": email, "password": hashed_password})
+        # Store password as plain text
+        await db.insert_one({"username": username, "email": email, "password": password})
 
         await asyncio.sleep(2)
         return JSONResponse(content={"message": "✅ Registration successful!"})
@@ -62,10 +58,10 @@ async def login(username: str = Form(...), password: str = Form(...)):
     try:
         user = await db.find_one({"username": username})
         if not user:
-            return JSONResponse(content={"message": "❌ User does not exist! Waiting..."}, status_code=400)
+            return JSONResponse(content={"message": "❌ User does not exist!"}, status_code=400)
 
-        if not pwd_context.verify(password, user["password"]):
-            return JSONResponse(content={"message": "❌ Wrong password! Waiting..."}, status_code=400)
+        if password != user["password"]:
+            return JSONResponse(content={"message": "❌ Wrong password!"}, status_code=400)
 
         await asyncio.sleep(2)
         return JSONResponse(content={"message": "✅ Login successful!"})
