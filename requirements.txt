@@ -1,8 +1,8 @@
-fastapi==0.111.1
-uvicorn[standard]==0.23.2
-motor==4.3.4
-passlib[bcrypt]==1.8.2
-python-dotenv==1.0.1
-pydantic==2.7.2
-email-validator==2.4.0
-gunicorn==21.2.0
+fastapi
+uvicorn[standard]
+motor
+passlib[bcrypt]
+python-dotenv
+pydantic
+email-validator
+gunicorn
