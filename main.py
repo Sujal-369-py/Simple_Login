@@ -44,13 +44,13 @@ async def register_user(username: str = Form(...), email: str = Form(...), passw
     try:
         # Check existing user
         if await db.find_one({"username": username}):
-            return JSONResponse(content={"message": "❌ Username already exists! Waiting..."}, status_code=400)
+            return JSONResponse(content={"message": "❌ Username already exists!"}, status_code=400)
 
         hashed_password = pwd_context.hash(password)
         await db.insert_one({"username": username, "email": email, "password": hashed_password})
 
         await asyncio.sleep(2)
-        return JSONResponse(content={"message": "✅ Registration successful! Waiting..."})
+        return JSONResponse(content={"message": "✅ Registration successful!"})
     
     except Exception as e:
         print("❌ Error during registration:", e)
@@ -68,7 +68,7 @@ async def login(username: str = Form(...), password: str = Form(...)):
             return JSONResponse(content={"message": "❌ Wrong password! Waiting..."}, status_code=400)
 
         await asyncio.sleep(2)
-        return JSONResponse(content={"message": "✅ Login successful! Waiting..."})
+        return JSONResponse(content={"message": "✅ Login successful!"})
 
     except Exception as e:
         print("❌ Error during login:", e)
