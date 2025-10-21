@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP File Handling and Directory Operations</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP File Handling and Directory Operations</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// File creation and writing</span>
+<span class="var">$file</span> = <span class="str">"demo.txt"</span><span class="op">;</span>
+<span class="var">$handle</span> = <span class="kw">fopen</span>(<span class="var">$file</span>, <span class="str">"w"</span>)<span class="op">;</span>
+<span class="kw">fwrite</span>(<span class="var">$handle</span>, <span class="str">"Hello, this is a demo file.\nSecond line of text."</span>)<span class="op">;</span>
+<span class="kw">fclose</span>(<span class="var">$handle</span>)<span class="op">;</span>
+
+<span class="comment">// Reading file</span>
+<span class="kw">if</span> (<span class="kw">file_exists</span>(<span class="var">$file</span>)) {
+  <span class="var">$content</span> = <span class="kw">file_get_contents</span>(<span class="var">$file</span>)<span class="op">;</span>
+  <span class="kw">echo</span> <span class="str">"File Content:&lt;br&gt;"</span> . <span class="var">$content</span> . <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Rename file</span>
+<span class="kw">rename</span>(<span class="str">"demo.txt"</span>, <span class="str">"renamed.txt"</span>)<span class="op">;</span>
+
+<span class="comment">// Delete file</span>
+<span class="kw">if</span> (<span class="kw">file_exists</span>(<span class="str">"renamed.txt"</span>)) {
+  <span class="kw">unlink</span>(<span class="str">"renamed.txt"</span>)<span class="op">;</span>
+  <span class="kw">echo</span> <span class="str">"File deleted successfully.&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Directory operations</span>
+<span class="kw">mkdir</span>(<span class="str">"demo_folder"</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Directory created.&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// List files in directory</span>
+<span class="var">$files</span> = <span class="kw">scandir</span>(<span class="str">"demo_folder"</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Files in demo_folder:&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">foreach</span> (<span class="var">$files</span> <span class="kw">as</span> <span class="var">$f</span>) {
+  <span class="kw">echo</span> <span class="var">$f</span> . <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Remove directory</span>
+<span class="kw">rmdir</span>(<span class="str">"demo_folder"</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Directory removed.&lt;br&gt;"</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>File Content:<br>Hello, this is a demo file.<br>Second line of text.</p>
+      <p>File deleted successfully.</p>
+      <p>Directory created.</p>
+      <p>Files in demo_folder:<br>. <br>..</p>
+      <p>Directory removed.</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

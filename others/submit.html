@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Form Submission Handling</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+
+  <div class="content-wrapper">
+    <h1>PHP Form Submission Handling</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Check if form was submitted via POST</span>
+<span class="kw">if</span> (<span class="var">$_SERVER</span>[<span class="str">"REQUEST_METHOD"</span>] <span class="op">===</span> <span class="str">"POST"</span>) {
+  <span class="comment">// Collect and sanitize input</span>
+  <span class="var">$name</span> <span class="op">=</span> <span class="kw">htmlspecialchars</span>(<span class="var">$_POST</span>[<span class="str">"name"</span>] ?? <span class="str">""</span>)<span class="op">;</span>
+  <span class="var">$class</span> <span class="op">=</span> <span class="kw">htmlspecialchars</span>(<span class="var">$_POST</span>[<span class="str">"class"</span>] ?? <span class="str">""</span>)<span class="op">;</span>
+  <span class="var">$rollno</span> <span class="op">=</span> <span class="kw">htmlspecialchars</span>(<span class="var">$_POST</span>[<span class="str">"rollno"</span>] ?? <span class="str">""</span>)<span class="op">;</span>
+
+  <span class="comment">// Display result</span>
+  <span class="kw">echo</span> <span class="str">"Your name is $name&lt;br&gt;"</span><span class="op">;</span>
+  <span class="kw">echo</span> <span class="str">"Your class is $class&lt;br&gt;"</span><span class="op">;</span>
+  <span class="kw">echo</span> <span class="str">"Your roll number is $rollno&lt;br&gt;"</span><span class="op">;</span>
+} <span class="kw">else</span> {
+  <span class="kw">echo</span> <span class="str">"Method Not Allowed. Please submit the form using POST.&lt;br&gt;"</span><span class="op">;</span>
+}
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <?php
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+          $name = htmlspecialchars($_POST["name"] ?? "");
+          $class = htmlspecialchars($_POST["class"] ?? "");
+          $rollno = htmlspecialchars($_POST["rollno"] ?? "");
+
+          echo "<p>Your name is <strong>$name</strong></p>";
+          echo "<p>Your class is <strong>$class</strong></p>";
+          echo "<p>Your roll number is <strong>$rollno</strong></p>";
+        } else {
+          echo "<p style='color:red;'>Method Not Allowed. Please submit the form using POST.</p>";
+        }
+      ?>
+    </div>
+  </div>
+
+</body>
+</html>

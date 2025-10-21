@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Functions (Built-in, User-defined, Recursion)</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Functions Example</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Built-in function</span>
+<span class="var">$text</span> <span class="op">=</span> <span class="str">"hello world"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Uppercase: "</span> <span class="op">.</span> <span class="kw">strtoupper</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// User-defined function</span>
+<span class="kw">function</span> <span class="fn">greet</span>(<span class="var">$name</span>) {
+  <span class="kw">return</span> <span class="str">"Hello, $name!"</span><span class="op">;</span>
+}
+<span class="kw">echo</span> <span class="fn">greet</span>(<span class="str">"Alex"</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Call by value</span>
+<span class="kw">function</span> <span class="fn">swapValue</span>(<span class="var">$x</span>, <span class="var">$y</span>) {
+  <span class="var">$temp</span> <span class="op">=</span> <span class="var">$x</span><span class="op">;</span>
+  <span class="var">$x</span> <span class="op">=</span> <span class="var">$y</span><span class="op">;</span>
+  <span class="var">$y</span> <span class="op">=</span> <span class="var">$temp</span><span class="op">;</span>
+  <span class="kw">echo</span> <span class="str">"Inside swapValue: x=$x, y=$y&lt;br&gt;"</span><span class="op">;</span>
+}
+<span class="var">$a</span> <span class="op">=</span> <span class="num">5</span><span class="op">;</span>
+<span class="var">$b</span> <span class="op">=</span> <span class="num">10</span><span class="op">;</span>
+<span class="fn">swapValue</span>(<span class="var">$a</span>, <span class="var">$b</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Outside swapValue: a=$a, b=$b&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Call by reference</span>
+<span class="kw">function</span> <span class="fn">swapReference</span>(<span class="op">&amp;</span><span class="var">$x</span>, <span class="op">&amp;</span><span class="var">$y</span>) {
+  <span class="var">$temp</span> <span class="op">=</span> <span class="var">$x</span><span class="op">;</span>
+  <span class="var">$x</span> <span class="op">=</span> <span class="var">$y</span><span class="op">;</span>
+  <span class="var">$y</span> <span class="op">=</span> <span class="var">$temp</span><span class="op">;</span>
+}
+<span class="fn">swapReference</span>(<span class="var">$a</span>, <span class="var">$b</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"After swapReference: a=$a, b=$b&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Recursion</span>
+<span class="kw">function</span> <span class="fn">factorial</span>(<span class="var">$n</span>) {
+  <span class="kw">if</span> (<span class="var">$n</span> <span class="op">&lt;=</span> <span class="num">1</span>) {
+    <span class="kw">return</span> <span class="num">1</span><span class="op">;</span>
+  }
+  <span class="kw">return</span> <span class="var">$n</span> <span class="op">*</span> <span class="fn">factorial</span>(<span class="var">$n</span> <span class="op">-</span> <span class="num">1</span>)<span class="op">;</span>
+}
+<span class="kw">echo</span> <span class="str">"Factorial of 5: "</span> <span class="op">.</span> <span class="fn">factorial</span>(<span class="num">5</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Uppercase: HELLO WORLD</p>
+      <p>Hello, Alex!</p>
+      <p>Inside swapValue: x=10, y=5</p>
+      <p>Outside swapValue: a=5, b=10</p>
+      <p>After swapReference: a=10, b=5</p>
+      <p>Factorial of 5: 120</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

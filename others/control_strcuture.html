@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Control Structures & File Inclusion</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Control Structures & File Inclusion</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// File inclusion</span>
+<span class="kw">include</span> <span class="str">'header.php'</span><span class="op">;</span>
+<span class="kw">require</span> <span class="str">'config.php'</span><span class="op">;</span>
+
+<span class="comment">// If-Else</span>
+<span class="var">$score</span> <span class="op">=</span> <span class="num">85</span><span class="op">;</span>
+<span class="kw">if</span> (<span class="var">$score</span> <span class="op">&gt;=</span> <span class="num">90</span>) {
+  <span class="kw">echo</span> <span class="str">"Grade: A&lt;br&gt;"</span><span class="op">;</span>
+} <span class="kw">elseif</span> (<span class="var">$score</span> <span class="op">&gt;=</span> <span class="num">75</span>) {
+  <span class="kw">echo</span> <span class="str">"Grade: B&lt;br&gt;"</span><span class="op">;</span>
+} <span class="kw">else</span> {
+  <span class="kw">echo</span> <span class="str">"Grade: C&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Switch</span>
+<span class="var">$day</span> <span class="op">=</span> <span class="str">"Tuesday"</span><span class="op">;</span>
+<span class="kw">switch</span> (<span class="var">$day</span>) {
+  <span class="kw">case</span> <span class="str">"Monday"</span><span class="op">:</span>
+    <span class="kw">echo</span> <span class="str">"Start of the week&lt;br&gt;"</span><span class="op">;</span>
+    <span class="kw">break</span><span class="op">;</span>
+  <span class="kw">case</span> <span class="str">"Tuesday"</span><span class="op">:</span>
+    <span class="kw">echo</span> <span class="str">"Second day&lt;br&gt;"</span><span class="op">;</span>
+    <span class="kw">break</span><span class="op">;</span>
+  <span class="kw">default</span><span class="op">:</span>
+    <span class="kw">echo</span> <span class="str">"Midweek or weekend&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Ternary Operator</span>
+<span class="var">$age</span> <span class="op">=</span> <span class="num">20</span><span class="op">;</span>
+<span class="var">$status</span> <span class="op">=</span> (<span class="var">$age</span> <span class="op">&gt;=</span> <span class="num">18</span>) <span class="op">?</span> <span class="str">"Adult"</span> <span class="op">:</span> <span class="str">"Minor"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Status: $status&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// For Loop</span>
+<span class="kw">for</span> (<span class="var">$i</span> <span class="op">=</span> <span class="num">1</span><span class="op">;</span> <span class="var">$i</span> <span class="op">&lt;=</span> <span class="num">5</span><span class="op">;</span> <span class="var">$i</span><span class="op">++</span>) {
+  <span class="kw">echo</span> <span class="str">"For Loop: $i&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// While Loop</span>
+<span class="var">$j</span> <span class="op">=</span> <span class="num">1</span><span class="op">;</span>
+<span class="kw">while</span> (<span class="var">$j</span> <span class="op">&lt;=</span> <span class="num">3</span>) {
+  <span class="kw">echo</span> <span class="str">"While Loop: $j&lt;br&gt;"</span><span class="op">;</span>
+  <span class="var">$j</span><span class="op">++</span><span class="op">;</span>
+}
+
+<span class="comment">// Do-While Loop</span>
+<span class="var">$k</span> <span class="op">=</span> <span class="num">1</span><span class="op">;</span>
+<span class="kw">do</span> {
+  <span class="kw">echo</span> <span class="str">"Do-While Loop: $k&lt;br&gt;"</span><span class="op">;</span>
+  <span class="var">$k</span><span class="op">++</span><span class="op">;</span>
+} <span class="kw">while</span> (<span class="var">$k</span> <span class="op">&lt;=</span> <span class="num">3</span>)<span class="op">;</span>
+
+<span class="comment">// Foreach Loop</span>
+<span class="var">$colors</span> <span class="op">=</span> [<span class="str">"Red"</span>, <span class="str">"Green"</span>, <span class="str">"Blue"</span>]<span class="op">;</span>
+<span class="kw">foreach</span> (<span class="var">$colors</span> <span class="kw">as</span> <span class="var">$color</span>) {
+  <span class="kw">echo</span> <span class="str">"Color: $color&lt;br&gt;"</span><span class="op">;</span>
+}
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Grade: B</p>
+      <p>Second day</p>
+      <p>Status: Adult</p>
+      <p>For Loop: 1</p>
+      <p>For Loop: 2</p>
+      <p>For Loop: 3</p>
+      <p>For Loop: 4</p>
+      <p>For Loop: 5</p>
+      <p>While Loop: 1</p>
+      <p>While Loop: 2</p>
+      <p>While Loop: 3</p>
+      <p>Do-While Loop: 1</p>
+      <p>Do-While Loop: 2</p>
+      <p>Do-While Loop: 3</p>
+      <p>Color: Red</p>
+      <p>Color: Green</p>
+      <p>Color: Blue</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

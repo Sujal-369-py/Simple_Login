@@ -1,0 +1,140 @@
+/* ------------------ Reset ------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+  }
+  
+  .container {
+    display: flex; /* sidebar + main content */
+  }
+  
+  /* ------------------ Navbar ------------------ */
+  .navbar {
+    width: 100%;
+    background: linear-gradient(90deg, #222, #111);
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 12px 40px;
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+  }
+  
+  .nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    padding: 6px 0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-links li a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #ff9800;
+    transition: 0.3s ease;
+  }
+  
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+  
+  .nav-links li a:hover {
+    color: #ff9800;
+    transform: scale(1.05);
+  }
+  
+  /* ------------------ Sidebar ------------------ */
+  .sidebar {
+    width: 220px;
+    background-color: #222;
+    color: #fff;
+    padding: 2rem 1rem;
+    position: fixed;
+    top: 44px; /* below navbar */
+    left: 0;
+    height: calc(100% - 44px);
+    overflow-y: auto;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #555;
+    padding-bottom: 0.5rem;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+  }
+  
+  .sidebar ul li {
+    margin-bottom: 1rem;
+  }
+  
+  .sidebar ul li a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s;
+  }
+  
+  .sidebar ul li a:hover {
+    color: #ff9800;
+  }
+  
+  /* ------------------ Main Content ------------------ */
+  main {
+    margin-left: 220px; /* space for sidebar */
+    padding: 80px 20px 20px 20px; /* top space for navbar */
+  }
+  
+  /* ------------------ Responsive ------------------ */
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      padding: 12px 20px;
+    }
+  
+    .nav-links {
+      flex-direction: column;
+      gap: 15px;
+      width: 100%;
+      align-items: center;
+    }
+  
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: 1rem;
+      margin-top: 20px;
+    }
+  
+    main {
+      margin-left: 0;
+      padding: 20px;
+    }
+  }
+  

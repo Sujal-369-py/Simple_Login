@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Database Operations</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Database Operations</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Connect to MySQL</span>
+<span class="var">$conn</span> <span class="op">=</span> <span class="kw">new</span> <span class="fn">mysqli</span>(<span class="str">"localhost"</span>, <span class="str">"root"</span>, <span class="str">""</span>, <span class="str">"testdb"</span>)<span class="op">;</span>
+<span class="kw">if</span> (<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">connect_error</span>) {
+  <span class="kw">die</span>(<span class="str">"Connection failed: "</span> . <span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">connect_error</span>)<span class="op">;</span>
+}
+
+<span class="comment">// Create table if not exists</span>
+<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">query</span>(<span class="str">"CREATE TABLE IF NOT EXISTS students (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50),
+  class VARCHAR(20),
+  rollno INT
+)"</span>)<span class="op">;</span>
+
+<span class="comment">// Insert data</span>
+<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">query</span>(<span class="str">"INSERT INTO students (name, class, rollno) VALUES ('Alex', '10A', 101)"</span>)<span class="op">;</span>
+
+<span class="comment">// Update data</span>
+<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">query</span>(<span class="str">"UPDATE students SET class='10B' WHERE name='Alex'"</span>)<span class="op">;</span>
+
+<span class="comment">// Delete data</span>
+<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">query</span>(<span class="str">"DELETE FROM students WHERE rollno=999"</span>)<span class="op">;</span>
+
+<span class="comment">// Select and display data</span>
+<span class="var">$result</span> <span class="op">=</span> <span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">query</span>(<span class="str">"SELECT * FROM students"</span>)<span class="op">;</span>
+<span class="kw">if</span> (<span class="var">$result</span><span class="op">-&gt;</span><span class="fn">num_rows</span> <span class="op">&gt;</span> <span class="num">0</span>) {
+  <span class="kw">while</span> (<span class="var">$row</span> <span class="op">=</span> <span class="var">$result</span><span class="op">-&gt;</span><span class="fn">fetch_assoc</span>()) {
+    <span class="kw">echo</span> <span class="str">"Name: "</span> . <span class="var">$row</span>[<span class="str">"name"</span>] . <span class="str">", Class: "</span> . <span class="var">$row</span>[<span class="str">"class"</span>] . <span class="str">", Roll No: "</span> . <span class="var">$row</span>[<span class="str">"rollno"</span>] . <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+  }
+} <span class="kw">else</span> {
+  <span class="kw">echo</span> <span class="str">"No records found."</span><span class="op">;</span>
+}
+
+<span class="var">$conn</span><span class="op">-&gt;</span><span class="fn">close</span>()<span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <?php
+        $conn = new mysqli("localhost", "root", "", "testdb");
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+
+        $conn->query("CREATE TABLE IF NOT EXISTS students (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(50),
+          class VARCHAR(20),
+          rollno INT
+        )");
+
+        $conn->query("INSERT INTO students (name, class, rollno) VALUES ('Alex', '10A', 101)");
+        $conn->query("UPDATE students SET class='10B' WHERE name='Alex'");
+        $conn->query("DELETE FROM students WHERE rollno=999");
+
+        $result = $conn->query("SELECT * FROM students");
+        if ($result->num_rows > 0) {
+          while ($row = $result->fetch_assoc()) {
+            echo "<p>Name: <strong>{$row["name"]}</strong>, Class: <strong>{$row["class"]}</strong>, Roll No: <strong>{$row["rollno"]}</strong></p>";
+          }
+        } else {
+          echo "<p>No records found.</p>";
+        }
+
+        $conn->close();
+      ?>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

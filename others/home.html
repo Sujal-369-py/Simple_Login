@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - PHP Introduction</title>
+  
+  <!-- Navbar CSS -->
+  <link rel="stylesheet" href="work/nav.css">
+  <!-- Home page CSS -->
+  <link rel="stylesheet" href="work/home.css">
+</head>
+<body>
+
+  <!-- Embedded Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Welcome to PHP</h1>
+        <p>PHP is a popular server-side scripting language used for web development. Create dynamic websites, interact with databases, and build powerful web applications.</p>
+        <a href="https://en.wikipedia.org/wiki/PHP" class="btn">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHP Details Section -->
+  <section class="php-details">
+    <div class="details-container">
+      <h2>About PHP</h2>
+      <div class="detail-card">
+        <h3>Creator</h3>
+        <p>PHP was originally created by <strong>Rasmus Lerdorf</strong> in 1994. It has evolved over the years to become a major language for web development.</p>
+      </div>
+      <div class="detail-card">
+        <h3>History</h3>
+        <p>PHP started as a set of Common Gateway Interface (CGI) scripts to track visitors to a website. It grew into a full-featured programming language used worldwide.</p>
+      </div>
+      <div class="detail-card">
+        <h3>Hosting</h3>
+        <p>PHP runs on most web servers including Apache, Nginx, and IIS. It's supported by almost all hosting providers and works well with MySQL, MariaDB, and other databases.</p>
+      </div>
+    </div>
+  </section>
+  <script>
+    fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+  </script>
+</body>
+</html>

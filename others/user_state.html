@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Cookies and Sessions</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Cookies and Sessions</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Start session</span>
+<span class="kw">session_start</span>()<span class="op">;</span>
+
+<span class="comment">// Set cookie (expires in 1 hour)</span>
+<span class="kw">setcookie</span>(<span class="str">"username"</span>, <span class="str">"Alex"</span>, <span class="kw">time</span>() <span class="op">+</span> <span class="num">3600</span>)<span class="op">;</span>
+
+<span class="comment">// Access cookie</span>
+<span class="var">$cookieUser</span> <span class="op">=</span> <span class="kw">isset</span>(<span class="var">$_COOKIE</span>[<span class="str">"username"</span>]) <span class="op">?</span> <span class="var">$_COOKIE</span>[<span class="str">"username"</span>] <span class="op">:</span> <span class="str">"Guest"</span><span class="op">;</span>
+
+<span class="comment">// Set session variable</span>
+<span class="var">$_SESSION</span>[<span class="str">"role"</span>] <span class="op">=</span> <span class="str">"Admin"</span><span class="op">;</span>
+
+<span class="comment">// Access session variable</span>
+<span class="var">$sessionRole</span> <span class="op">=</span> <span class="var">$_SESSION</span>[<span class="str">"role"</span>]<span class="op">;</span>
+
+<span class="comment">// Current time and expiration</span>
+<span class="var">$currentTime</span> <span class="op">=</span> <span class="kw">date</span>(<span class="str">"Y-m-d H:i:s"</span>)<span class="op">;</span>
+<span class="var">$expireTime</span> <span class="op">=</span> <span class="kw">date</span>(<span class="str">"Y-m-d H:i:s"</span>, <span class="kw">time</span>() <span class="op">+</span> <span class="num">3600</span>)<span class="op">;</span>
+
+<span class="comment">// Output</span>
+<span class="kw">echo</span> <span class="str">"Cookie 'username': $cookieUser&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Session 'role': $sessionRole&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Current Time: $currentTime&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Cookie Expires At: $expireTime&lt;br&gt;"</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Cookie 'username': Alex</p>
+      <p>Session 'role': Admin</p>
+      <p>Current Time: 2025-10-21 18:21:00</p>
+      <p>Cookie Expires At: 2025-10-21 19:21:00</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

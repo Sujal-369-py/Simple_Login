@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* vibrant gradient */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar placeholder spacing */
+#navbar-placeholder {
+    width: 100%;
+}
+
+/* Centering container */
+#content {
+    margin-top: 90px; /* adjust according to your top navbar */
+    margin-left: 240px; /* adjust according to your side navbar */
+    margin-right: 10px;
+    text-align: center;
+    padding: 40px 60px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 25px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); /* stronger shadow for depth */
+}
+
+/* Heading styling */
+#content h3 {
+    color: #2c3e50; /* darker color for contrast */
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/* Paragraph styling */
+#content p {
+    color: #1f1f1f; /* darker text for readability */
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* Optional: make links inside content stand out */
+#content a {
+    color: #2575fc; /* matches gradient color */
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+#content a:hover {
+    color: #6a11cb; /* gradient complement */
+}
+</style>
+</head>
+<body>
+
+<!-- Placeholder for your existing navbar -->
+<div id="navbar-placeholder"></div>
+
+<!-- Main centered content -->
+<div id="content">
+    <h3>Welcome!</h3>
+    <p>Click the links below to navigate through topics. Try this, that, and more — everything is simple and centered for you!</p>
+
+</div>
+
+<!-- JS to fetch and include the navbar -->
+<script>
+    fetch('php_nav.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading navbar:', error);
+            document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+        });
+</script>
+
+</body>
+</html>

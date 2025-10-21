@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Basics (Variables, Operators, Echo, Print)</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Basics Example</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Variables and comments</span>
+<span class="var">$a</span> <span class="op">=</span> <span class="num">10</span><span class="op">;</span>
+<span class="var">$b</span> <span class="op">=</span> <span class="num">5</span><span class="op">;</span>
+<span class="var">$name</span> <span class="op">=</span> <span class="str">"Alex"</span><span class="op">;</span>
+
+<span class="comment">// Arithmetic Operators</span>
+<span class="var">$sum</span> <span class="op">=</span> <span class="var">$a</span> <span class="op">+</span> <span class="var">$b</span><span class="op">;</span>
+<span class="var">$difference</span> <span class="op">=</span> <span class="var">$a</span> <span class="op">-</span> <span class="var">$b</span><span class="op">;</span>
+<span class="var">$product</span> <span class="op">=</span> <span class="var">$a</span> <span class="op">*</span> <span class="var">$b</span><span class="op">;</span>
+<span class="var">$division</span> <span class="op">=</span> <span class="var">$a</span> <span class="op">/</span> <span class="var">$b</span><span class="op">;</span>
+<span class="var">$modulus</span> <span class="op">=</span> <span class="var">$a</span> <span class="op">%</span> <span class="var">$b</span><span class="op">;</span>
+
+<span class="comment">// Concatenation Operator</span>
+<span class="var">$message</span> <span class="op">=</span> <span class="str">"Hello, "</span> <span class="op">.</span> <span class="var">$name</span> <span class="op">.</span> <span class="str">"! Welcome to PHP basics."</span><span class="op">;</span>
+
+<span class="comment">// Output using echo</span>
+<span class="kw">echo</span> <span class="str">"Sum: $sum&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Difference: $difference&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Product: $product&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Division: $division&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Modulus: $modulus&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="var">$message</span> <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Output using print</span>
+<span class="kw">print</span>(<span class="str">"This line is printed using print().&lt;br&gt;"</span><span class="op">)</span><span class="op">;</span>
+<span class="kw">print</span>(<span class="str">"a = $a, b = $b&lt;br&gt;"</span><span class="op">)</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Sum: 15</p>
+      <p>Difference: 5</p>
+      <p>Product: 50</p>
+      <p>Division: 2</p>
+      <p>Modulus: 0</p>
+      <p>Hello, Alex! Welcome to PHP basics.</p>
+      <p>This line is printed using print().</p>
+      <p>a = 10, b = 5</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>

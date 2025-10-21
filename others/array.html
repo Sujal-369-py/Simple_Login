@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP Arrays and Their Types</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP Arrays and Their Types</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="comment">// Indexed Array</span>
+<span class="var">$fruits</span> <span class="op">=</span> [<span class="str">"Apple"</span>, <span class="str">"Banana"</span>, <span class="str">"Cherry"</span>]<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Second fruit: $fruits[1]&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Loop through indexed array</span>
+<span class="kw">foreach</span> (<span class="var">$fruits</span> <span class="kw">as</span> <span class="var">$fruit</span>) {
+  <span class="kw">echo</span> <span class="str">"Fruit: $fruit&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Associative Array</span>
+<span class="var">$ages</span> <span class="op">=</span> [<span class="str">"Alex"</span> <span class="op">=&gt;</span> <span class="num">25</span>, <span class="str">"Sam"</span> <span class="op">=&gt;</span> <span class="num">30</span>, <span class="str">"Jamie"</span> <span class="op">=&gt;</span> <span class="num">22</span>]<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Sam's age: "</span> <span class="op">.</span> <span class="var">$ages</span>[<span class="str">"Sam"</span>] <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Loop through associative array</span>
+<span class="kw">foreach</span> (<span class="var">$ages</span> <span class="kw">as</span> <span class="var">$name</span> <span class="op">=&gt;</span> <span class="var">$age</span>) {
+  <span class="kw">echo</span> <span class="str">"$name is $age years old&lt;br&gt;"</span><span class="op">;</span>
+}
+
+<span class="comment">// Multidimensional Array</span>
+<span class="var">$contacts</span> <span class="op">=</span> [
+  [<span class="str">"name"</span> <span class="op">=&gt;</span> <span class="str">"Alex"</span>, <span class="str">"phone"</span> <span class="op">=&gt;</span> <span class="str">"123456"</span>],
+  [<span class="str">"name"</span> <span class="op">=&gt;</span> <span class="str">"Sam"</span>, <span class="str">"phone"</span> <span class="op">=&gt;</span> <span class="str">"789012"</span>]
+]<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Sam's phone: "</span> <span class="op">.</span> <span class="var">$contacts</span>[<span class="num">1</span>][<span class="str">"phone"</span>] <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Array Functions</span>
+<span class="kw">array_push</span>(<span class="var">$fruits</span>, <span class="str">"Mango"</span>)<span class="op">;</span>
+<span class="kw">array_pop</span>(<span class="var">$fruits</span>)<span class="op">;</span>
+<span class="kw">sort</span>(<span class="var">$fruits</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Sorted fruits: "</span> <span class="op">.</span> <span class="kw">implode</span>(<span class="str">", "</span>, <span class="var">$fruits</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="kw">asort</span>(<span class="var">$ages</span>)<span class="op">;</span>
+<span class="kw">ksort</span>(<span class="var">$ages</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Sorted ages by key: "</span> <span class="op">.</span> <span class="kw">implode</span>(<span class="str">", "</span>, <span class="kw">array_values</span>(<span class="var">$ages</span>)) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="kw">echo</span> <span class="str">"Keys in ages: "</span> <span class="op">.</span> <span class="kw">implode</span>(<span class="str">", "</span>, <span class="kw">array_keys</span>(<span class="var">$ages</span>)) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="kw">echo</span> <span class="str">"Is 'Apple' in fruits? "</span> <span class="op">.</span> (<span class="kw">in_array</span>(<span class="str">"Apple"</span>, <span class="var">$fruits</span>) <span class="op">?</span> <span class="str">"Yes"</span> <span class="op">:</span> <span class="str">"No"</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Explode and Implode</span>
+<span class="var">$sentence</span> <span class="op">=</span> <span class="str">"PHP is powerful and flexible"</span><span class="op">;</span>
+<span class="var">$words</span> <span class="op">=</span> <span class="kw">explode</span>(<span class="str">" "</span>, <span class="var">$sentence</span>)<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Words: "</span> <span class="op">.</span> <span class="kw">implode</span>(<span class="str">" | "</span>, <span class="var">$words</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Second fruit: Banana</p>
+      <p>Fruit: Apple</p>
+      <p>Fruit: Banana</p>
+      <p>Fruit: Cherry</p>
+      <p>Sam's age: 30</p>
+      <p>Alex is 25 years old</p>
+      <p>Sam is 30 years old</p>
+      <p>Jamie is 22 years old</p>
+      <p>Sam's phone: 789012</p>
+      <p>Sorted fruits: Apple, Banana,
+    </p></div></div>
+    <script>
+        fetch('php_nav.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('navbar-placeholder').innerHTML = data;
+          })
+          .catch(error => {
+            console.error('Error loading navbar:', error);
+            document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+          });
+      </script>
+
+</body></html>

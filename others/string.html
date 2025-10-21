@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PHP String Functions</title>
+  <link rel="stylesheet" href="work/basic.css" />
+</head>
+<body>
+  <div id="navbar-placeholder"></div>
+
+  <div class="content-wrapper">
+    <h1>PHP String Functions</h1>
+
+    <h2>📜 Code</h2>
+    <pre>
+<span class="comment">&lt;?php</span>
+<span class="var">$text</span> <span class="op">=</span> <span class="str">"  Hello World!  "</span><span class="op">;</span>
+
+<span class="comment">// Basic functions</span>
+<span class="kw">echo</span> <span class="str">"Length: "</span> <span class="op">.</span> <span class="kw">strlen</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Trimmed: "</span> <span class="op">.</span> <span class="kw">trim</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Uppercase: "</span> <span class="op">.</span> <span class="kw">strtoupper</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Lowercase: "</span> <span class="op">.</span> <span class="kw">strtolower</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Searching and replacing</span>
+<span class="kw">echo</span> <span class="str">"Position of 'World': "</span> <span class="op">.</span> <span class="kw">strpos</span>(<span class="var">$text</span>, <span class="str">"World"</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Replace 'World' with 'PHP': "</span> <span class="op">.</span> <span class="kw">str_replace</span>(<span class="str">"World"</span>, <span class="str">"PHP"</span>, <span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Substring and splitting</span>
+<span class="kw">echo</span> <span class="str">"Substring (0,5): "</span> <span class="op">.</span> <span class="kw">substr</span>(<span class="var">$text</span>, <span class="num">0</span>, <span class="num">5</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="var">$parts</span> <span class="op">=</span> <span class="kw">explode</span>(<span class="str">" "</span>, <span class="kw">trim</span>(<span class="var">$text</span>))<span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Exploded: "</span> <span class="op">.</span> <span class="kw">implode</span>(<span class="str">"-"</span>, <span class="var">$parts</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Character-level functions</span>
+<span class="kw">echo</span> <span class="str">"ASCII of 'A': "</span> <span class="op">.</span> <span class="kw">ord</span>(<span class="str">"A"</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Char from 65: "</span> <span class="op">.</span> <span class="kw">chr</span>(<span class="num">65</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Encoding and hashing</span>
+<span class="kw">echo</span> <span class="str">"MD5: "</span> <span class="op">.</span> <span class="kw">md5</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="kw">echo</span> <span class="str">"Base64: "</span> <span class="op">.</span> <span class="kw">base64_encode</span>(<span class="var">$text</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+
+<span class="comment">// Count characters</span>
+<span class="kw">echo</span> <span class="str">"Character count: "</span> <span class="op">.</span> <span class="kw">count_chars</span>(<span class="var">$text</span>, <span class="num">3</span>) <span class="op">.</span> <span class="str">"&lt;br&gt;"</span><span class="op">;</span>
+<span class="comment">?&gt;</span>
+    </pre>
+
+    <h2>🖨️ Output</h2>
+    <div class="output-box">
+      <p>Length: 17</p>
+      <p>Trimmed: Hello World!</p>
+      <p>Uppercase:   HELLO WORLD!  </p>
+      <p>Lowercase:   hello world!  </p>
+      <p>Position of 'World': 8</p>
+      <p>Replace 'World' with 'PHP':   Hello PHP!  </p>
+      <p>Substring (0,5):   Hell</p>
+      <p>Exploded: Hello-World!</p>
+      <p>ASCII of 'A': 65</p>
+      <p>Char from 65: A</p>
+      <p>MD5: ed076287532e86365e841e92bfc50d8c</p>
+      <p>Base64: ICAgSGVsbG8gV29ybGQhICA=</p>
+      <p>Character count: HeloWrd!</p>
+    </div>
+  </div>
+
+  <script>
+    fetch('php_nav.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('navbar-placeholder').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading navbar:', error);
+        document.getElementById('navbar-placeholder').innerHTML = 'Navbar failed to load.';
+      });
+  </script>
+</body>
+</html>
